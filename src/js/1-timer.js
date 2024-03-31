@@ -17,12 +17,14 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
-    checkValidData();
+    checkDateValidity();
   },
 };
 flatpickr(inputDateTimePicker, options);
 
-function checkValidData() {
+btnStart.disabled = true; // Заборонити кнопку btnStart при завантаженні сторінки
+
+function checkDateValidity() {
   if (!userSelectedDate || userSelectedDate <= new Date()) {
     iziToast.error({
       title: 'Error',
@@ -68,9 +70,6 @@ btnStart.addEventListener('click', e => {
   countdownInterval = setInterval(updateTimer, 1000);
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  btnStart.disabled = true;
-});
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time

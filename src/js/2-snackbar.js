@@ -10,12 +10,10 @@ function handleSubmit(event) {
   const delayInput = this.elements.delay;
   const delay = parseInt(delayInput.value);
 
-  const stateInput = this.elements.state;
+  const stateInput = document.querySelector('input[name="state"]:checked');
   const state = stateInput.value;
 
-  let promise;
-
-  promise = new Promise((resolve, reject) => {
+  let promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       if (state === 'fulfilled') {
         resolve(delay);
@@ -24,12 +22,14 @@ function handleSubmit(event) {
       }
     }, delay);
   });
+    
   promise
     .then(delay => {
       iziToast.success({
         title: 'Success',
         message: `✅ Fulfilled promise in ${delay}ms`,
         position: 'topRight',
+        backgroundColor: '#5cb85c',
       });
     })
 
@@ -38,6 +38,7 @@ function handleSubmit(event) {
         title: 'Error',
         message: `❌ Rejected promise in ${delay}ms`,
         position: 'topRight',
+        backgroundColor: '#d9534f',
       });
     });
 
